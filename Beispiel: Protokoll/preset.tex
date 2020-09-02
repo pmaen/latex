@@ -1,0 +1,94 @@
+%Wenn du dir unsicher bei der benutzung eines Paketes bist, google das Problem oder besuche ctan.org. dort gibt es Bedienungsanleitungen zu jedem bekannten LaTeX-Paket
+
+\documentclass[12pt,a4paper]{article}
+
+%Language
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel} %neue deutsche Rechtschreibung, deutsche Datumsangaben, äöü, usw.
+\usepackage[T1]{fontenc}
+\usepackage{ngerman}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage{csquotes}
+\usepackage{lmodern}
+\usepackage{kpfonts}
+
+\usepackage{scrextend} %erweitert die Funktionen des article auf sog. KOMA-Funktionen
+
+\usepackage{textgreek} %erlaubt das Verwenden von griechischen Buchstaben, ohne dass diese kursiv gestellt werden
+
+\usepackage{geometry} %Seitenränder, usw.
+
+%File integration
+\usepackage{pdflscape} %lässt uns einzelne Seiten im Querformat ausrichten
+\usepackage{csvsimple} %erlaubt den Import von csv-Tabellen (praktisch bei großen Datensätzen)
+\usepackage{pdfpages} %erlaubt Einbinden von pdf-Dateien (z.B. die Tagesprotokolle
+\usepackage{float} %sorgt dafür, dass Tabellen udn Bilder dort bleiben wo sie sollen
+\usepackage{hyperref} %macht Links klickbar (wie bei HTML)
+\usepackage{multirow} %erlaubt es Tabellenspalten zu verbinden
+
+%BibLaTeX
+\usepackage[giveninits=true, %kürzt die Vornamen der Autoren ab
+hyperref, %macht Links klickbar
+backend=bibtex, %definiert in welcher Programmiersprache die Bibliotheksdatei geschrieben ist
+sorting=none] %sorgt dafür, dass Quellen in der reihenfolge nummeriert werden, in der sie auftauchen
+{biblatex} %bindet die Bibliotheksdatei ein
+\DeclareBibliographyDriver{inproceedings}{\printlist{location}} %sorgt dafür, dass der VeröffentlichUngsort mit angezeigt wird
+\DeclareBibliographyDriver{inproceedings}{\printlist{urldate}} %sorgt dafür, dass das Datum des letzten Zugriffs angezeigt wird
+\addbibresource{}%in die geschweifte Klammer kommt der Pfad deiner Bibliotheksdatei. Pfade in LaTeX werden nicht wie bei Windows üblich mit Backslash sondern mit Forewardslash geschrieben. Aus C:\Users\test\Datei1 wird also C:/Users/test/Datei1
+
+\begin{document}
+%\includepdf[scale=1, frame=false]{} %wenn du das Deckblatt am PC ausgefüllt hast, kannst du es hier einbinden (einfach das % am Anfang der Zeile wegnehmen und zwischen die geschweiften Klammern den Pfad des PDF angeben)
+\tableofcontents % Inhaltsverzeichnis
+\listoffigures % Abbildungsverzeichnis
+\listoftables % Tabellenverzeichnis
+\newpage
+\section{Motivation}%sections sind die "standard"-Kapitel. Im Texmaker findest du unter dem Dropdown-Menü LaTeX die ganzen Befehle zum strukturieren. \chapter beispielsweise funktioniert aber in diesem Dokument nicht.
+%\subsection{•} % das wäre ein Unterkapitel
+
+\section{Physikalische Grundlagen}
+
+\section{Durchführung}
+%Hier wollen wir ein Bild einbinden:
+	%\begin{figure}[H]	%das H hinter der geschweiften Klammer ist wichtig, damit das Bild letzlich genau da landet, wo es hin soll
+	%\includegraphics[]{•} %in die eckigen Klammern kommen immer Optionen. Hier sind die Optionen width=; height= und scale= sinnvoll. Soll ein Bild die Seitenbreite ausfüllen, nimmst du width=\linewidth (\textwidth würde auch gehen, amcht aber im Querformat Probleme). In die geschweifte Klammer Kommt wieder der Dateipfad. 
+	%\caption[]{} %Bildunterschrift. In die eckigen Klammern kommt der Text, der ins Abbildunsgverzeichnis soll, in die geschweiften Klammern das, was wirklich unter dem Bild steht.
+	%\label{fig:1} % Label benutzt man zum referenzieren. Label müssen immer nach der Caption gesetzt werden, sonst funktioniert es nicht. Das Label fig:1 lässt sich mit \ref{fig:1} abrufen. Nur weil man es fig:1 nennt muss man beim referenzieren aber immernoch händisch Abbildung oder Diagramm davor schreiben (je nachdem was man gerne möchte)
+	%\end{figure}
+\section{Messergebnisse und Fehlerrechnung}
+%Hier wollen wir eine Formel einbinden:
+	\begin{equation} %Shortcut: Ctrl+Shift+N
+			%Das ist eine Math-Umgebung. Manche Befehle funktionieren nur hier. Symbole und Pfeile findest du links in den Subtabs der Struktur. Hier sind die Shortcuts sehr sinnvoll und es lohnt sich die Liste daneben liegen zu haben. So wird aus \frac{}{} (was einen Bruch erzeugt) Alt+Shift+F
+			%Auch Formeln sollte man taggen (genau wie Bilder, nur dass man jetzt eq:1 statt fig:1 verwendet).
+	\end{equation}
+%Math-Umgebungen, die mit \begin{equation} gestartet werden, werden durchnumemriert. Wenn du etwas in der Zeile mathematisch ausgeben willst, benutzt du die $-Zeichen (1 zu Beginn, 1 am Schluss)
+% Willst du Formeln referenzieren, gibt es dafür den Befehl \eqref{•}. Der sorgt dafür, dass gleich klammern drum sind, der Leser also erkennt, dass es eine Formel ist.
+\section{Angabe der Endergebnisse und Diskussion}
+
+\newpage %fängt neue Seite an
+\printbibliography %Quellenverzeichnis
+\newpage 
+\newgeometry{margin=0.5cm} %macht Ränder schmaler, damit im Anhang die Bilder größer auf den Seiten sind
+\section{Anhang}
+
+\subsection{Tabellen}
+%Das letzte relativ wichtige für diese Protokolle sind Tabellen.
+%Damit man Tabellen eine caption gegen kann startet man sie mit
+	%\begin{table}
+		%Innerhalb der Tabelle erzugt man dann den Tabular
+		%\begin{tabular}{•} %hier kommt in die geschweiften Klammern die Formatierung der Spalten. | steht für einen vertikalen Strich, c orientiert den Inhalt mittg, l linksbündig, r rechtsbündig. Wenn du die Spaltenbreite festlegen willst, musst du statt l,c oder r p benutzen (für 5cm bspw. p{5cm})
+			%Hier stehen dann die Informationen, die man auch sieht. 2 Spalten werden durch ein & Zeichen getrennt (wenn du & oder % im Text nutzen willst muss deshlab immer ein Backslash davor). Am Ende einer Zeile schreibst du \\\hline Dann wird ein horizontaler Strich gesetzt und du kannst anfangen, die nächste Zeile zu schreiben. Läasst du das \hline weg, gibt es keinen Strich, du bist aber in der nächsten Zeile. Doppelte Striche gehen mit \\\hline\hline 
+			%\multicolumn{•}{•}{•} % Willst du Spalten verbinden nutzt du multicolumn. Nn das erste Feld kommt die Anzahl der zu verbindenden Spalten, in das zweite das Format (für mittig c, linksbündig l, ...) und in das letzte der Text, dr letztlich in der Zeile stehe soll
+		%\end{tabular}
+	%\end{table}
+\subsection{Tagesprotokoll}
+% Zu den Quellen:
+%Wenn du dein Dokument das erste mal compiled hast (F1-Taste) wird im Dokumentordner eine Datei namens Dateiname-blx.bib erstellt. In diese trägst du deine Quellen ein. Ein Preset mit allen informationen die ausgefllt werden müssen /wie du sie anlegen musst kann ich dir geben.
+%Zitieren kanst du mit \cite{•} In die geschweiften Klammern kommt das Quellenkürzel.
+%Anführunsgstriche für wörtliche Zitate bekommt man durch \glqq •\grqq
+%Damit die Quellen im Quellenverzeichnis angezeigt werden, musst du nach dem du die .bib.-Datei gespeichert hast F11 drücken, dann F1, dann wieder F11 und abschließend nochmal F1
+\end{document}
