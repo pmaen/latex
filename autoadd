@@ -1,0 +1,1 @@
+ls eps/*.eps | sed -e "s/.*/\\\\includegraphics["width=\textwidth"]{"\\0"}/" > epslist_new.tex
